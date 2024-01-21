@@ -17,7 +17,7 @@ public class CreateUser {
     @Autowired
     private EmailService emailService;
 
-    public record Output(String name, int age, double salary) {
+    public record GetUserOutput(String name, int age, String login, double salary) {
     }
 
     public record PersisteInput(String name, int age, String login, double salary) {
@@ -29,13 +29,13 @@ public class CreateUser {
         return "" + id;
     }
 
-    public Output get(long id) {
+    public GetUserOutput get(long id) {
         Optional<User> userG = repository.findById(id);
         if (!userG.isPresent()) {
             return null;
         }
         User user = userG.get();
-        return new Output(user.getName(), user.getAge(), user.getSalary());
+        return new GetUserOutput(user.getName(), user.getAge(), user.getLogin(), user.getSalary());
     }
 
 }
