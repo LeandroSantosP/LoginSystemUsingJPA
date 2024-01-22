@@ -3,6 +3,7 @@ package com.SpringBootAnnotations;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,8 @@ public class MyController {
     @Autowired
     private Logger logger;
 
-    @Autowired()
+    @Autowired
+    @Qualifier("userRepositoryMemory")
     private UserRepository userRepository;
 
     private UUID id = UUID.randomUUID();

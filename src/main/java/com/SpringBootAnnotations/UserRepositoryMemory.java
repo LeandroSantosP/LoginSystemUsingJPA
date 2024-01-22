@@ -22,6 +22,7 @@ public class UserRepositoryMemory implements UserRepository {
 
     @Override
     public User get(UUID id) {
+        System.out.println("Repo with HashTable");
         var s = this.users.get(id);
         if (s == null) {
             throw new MyNotFound();
