@@ -17,13 +17,14 @@ public class UserRepositoryMemoryWithArray implements UserRepository {
     }
 
     @Override
-    public void pesiste(UUID Id, String name, int age) {
-        User user = new User(Id, name, age);
+    public String pesiste(String name, int age) {
+        User user = new User(UUID.randomUUID().toString(), name, age);
         this.users.add(user);
+        return user.id().toString();
     }
 
     @Override
-    public User get(UUID id) {
+    public User get(String id) {
         System.out.println("Repo with ArrayList");
         return this.users.stream().filter(user -> user.id().equals(id)).findFirst().orElseThrow(MyNotFound::new);
     }

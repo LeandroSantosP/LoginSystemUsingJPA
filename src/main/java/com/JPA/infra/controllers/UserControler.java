@@ -23,12 +23,13 @@ public class UserControler {
 
     @PostMapping("/")
     public String createUser(@RequestBody CreateUserInput entity) {
-        return createUser.persiste(new PersisteInput(entity.name(), entity.age(), entity.login(), entity.salary()));
+        return this.createUser
+                .persiste(new PersisteInput(entity.name(), entity.age(), entity.login(), entity.salary()));
     }
 
     @GetMapping("/{id}")
     public GetUserOutput getUser(@PathVariable long id) {
-        var output = createUser.get(id);
+        var output = this.createUser.get(id);
         return new GetUserOutput(output.name(), output.age(), output.login(), output.salary());
     }
 }

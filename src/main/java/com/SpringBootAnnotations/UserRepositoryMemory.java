@@ -8,26 +8,27 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepositoryMemory implements UserRepository {
 
-    private Hashtable<UUID, User> users;
+    private Hashtable<String, User> users;
 
     public UserRepositoryMemory() {
         this.users = new Hashtable<>();
     }
 
     @Override
-    public void pesiste(UUID Id, String name, int age) {
-        User user = new User(Id, name, age);
+    public String pesiste(String name, int age) {
+        User user = new User(UUID.randomUUID().toString(), name, age);
         this.users.put(user.id(), user);
+        return user.id().toString();
     }
 
     @Override
-    public User get(UUID id) {
-        System.out.println("Repo with HashTable");
-        var s = this.users.get(id);
-        if (s == null) {
+    public User get(String id) {
+        User user = this.users.get(id);
+
+        if (user == null) {
             throw new MyNotFound();
         }
-        return this.users.get(id);
+        return user;
     }
 
 }

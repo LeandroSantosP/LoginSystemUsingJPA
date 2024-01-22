@@ -5,14 +5,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.JPA.infra.database.JPAUserRepository;
 import com.JPA.infra.database.User;
+import com.JPA.infra.database.UserRepository;
 
 @Service
 public class CreateUser {
 
     @Autowired
-    private JPAUserRepository repository;
+    private UserRepository repository;
 
     @Autowired
     private EmailService emailService;
