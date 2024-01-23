@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
 
-@Component(value = "Logger")
+@Component
 public class Logger {
     public void currentTime() {
         Calendar calendar = Calendar.getInstance();

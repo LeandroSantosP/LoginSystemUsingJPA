@@ -21,13 +21,13 @@ public class MyControllerTest {
 
     @Test
     void testCreateUser() {
+        
         var input = new CreateUserInput("Jonh Doe", 33);
         String id = this.template.postForEntity("http://localhost:" + port + "/create", input,
                 String.class).getBody();
 
         ResponseUser output = this.template.getForEntity("http://localhost:" + port + "/get/" + id,
                 ResponseUser.class).getBody();
-
         assertEquals(output.name(), "Jonh Doe");
         assertEquals(output.age(), 33);
     }
