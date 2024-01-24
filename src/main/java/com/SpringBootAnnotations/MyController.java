@@ -3,6 +3,7 @@ package com.SpringBootAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SpringBootAnnotations.UserRepository.User;
 
 @RestController
+@Scope("singleton") /* <-- nice one */
 public class MyController {
     @Autowired
     private Logger logger;
@@ -29,6 +31,10 @@ public class MyController {
 
     @Value("${app.portTest}")
     private String postgresPort;
+
+    public MyController() {
+        System.out.println("CONTROLLER");
+    }
 
     public record CreateUserInput(String name, int age) {
     }

@@ -2,7 +2,6 @@ package com.SpringBootAnnotations;
 
 import java.util.Hashtable;
 import java.util.UUID;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
