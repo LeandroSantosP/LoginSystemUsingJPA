@@ -29,6 +29,9 @@ public class User {
     private String name;
 
     @Column(nullable = false)
+    private String role;
+
+    @Column(nullable = false)
     private int age;
 
     @Column(nullable = false, unique = true)

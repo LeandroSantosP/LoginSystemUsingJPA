@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.SpringBootAnnotations.UserRepository.User;
-
 @RestController
 @Scope("singleton") /* <-- nice one */
 public class MyController {
+
     @Autowired
     private Logger logger;
 
@@ -26,7 +25,7 @@ public class MyController {
     private LazyBean lazyBean;
 
     @Autowired
-    @Qualifier("userRepositoryMemory")
+    @Qualifier("userRepository")
     private UserRepository userRepository;
 
     @Value("${app.portTest}")
@@ -36,13 +35,14 @@ public class MyController {
         System.out.println("CONTROLLER");
     }
 
-    public record CreateUserInput(String name, int age) {
+    public record CreateUserInput(String name, int age, String email, String password) {
     }
 
     @PostMapping("/create")
     public String create(@RequestBody CreateUserInput body) {
         logger.currentTime();
-        return userRepository.pesiste(body.name(), body.age());
+        User user = new User(body.name(), body.age(), body.email(), body.password());
+        return userRepository.pesiste(user);
     }
 
     public record ResponseUser(String id, String name, int age) {
@@ -52,7 +52,8 @@ public class MyController {
     public ResponseEntity<ResponseUser> get(@PathVariable String id) {
         this.myBean.exec();
         logger.currentTime();
-        User user = userRepository.get(id);
-        return ResponseEntity.ok(new ResponseUser(user.id(), user.name(), user.age()));
+        User user = userRepository.myGet(id);
+        return ResponseEntity.ok(new ResponseUser(user.getId(), user.getName(), user.getAge()));
     }
+
 }

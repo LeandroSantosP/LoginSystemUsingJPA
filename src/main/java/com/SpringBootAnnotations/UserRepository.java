@@ -1,10 +1,28 @@
 package com.SpringBootAnnotations;
 
-public interface UserRepository {
-    public record User(String id, String name, int age) {
-    }
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Optional;
 
-    public String pesiste(String name, int age);
+public interface UserRepository extends JpaRepository<HUser, String> {
 
-    public User get(String id);
+    default public String pesiste(User user) {
+        HUser userData = HUser.builder()
+                .name(user.getName()).age(user.getAge()).roles(user.getRoles())
+                .email(user.getEmail()).password(user.getPassword()).build();
+        this.save(userData);
+        return user.getId();
+    };
+
+    default public User myGet(String id) {
+        Optional<HUser> userDataOptional = this.findById(id);
+        if (!userDataOptional.isPresent()) {
+            throw new MyNotFound();
+        }
+        HUser userData = userDataOptional.get();
+        return new User(userData.getName(), userData.getAge(), userData.getEmail(), userData.getPassword());
+    };
+
+    UserDetails findByName(String name);
+
 }

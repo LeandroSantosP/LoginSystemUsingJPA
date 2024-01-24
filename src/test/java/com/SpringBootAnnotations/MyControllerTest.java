@@ -21,8 +21,8 @@ public class MyControllerTest {
 
     @Test
     void testCreateUser() {
-        
-        var input = new CreateUserInput("Jonh Doe", 33);
+
+        var input = new CreateUserInput("Jonh Doe", 33, "john.doe@gmail.com", "senha123");
         String id = this.template.postForEntity("http://localhost:" + port + "/create", input,
                 String.class).getBody();
 
