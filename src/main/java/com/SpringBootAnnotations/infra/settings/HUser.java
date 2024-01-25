@@ -1,4 +1,4 @@
-package com.SpringBootAnnotations;
+package com.SpringBootAnnotations.infra.settings;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.nimbusds.oauth2.sdk.Role;
+import com.SpringBootAnnotations.domain.Roles;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

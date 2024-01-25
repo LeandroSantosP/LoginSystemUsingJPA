@@ -1,4 +1,4 @@
-package com.SpringBootAnnotations;
+package com.SpringBootAnnotations.domain.exeptions;
 
 import org.springframework.http.HttpStatus;
 

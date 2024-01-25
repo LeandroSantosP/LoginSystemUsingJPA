@@ -1,7 +1,12 @@
-package com.SpringBootAnnotations;
+package com.SpringBootAnnotations.infra.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.SpringBootAnnotations.domain.User;
+import com.SpringBootAnnotations.domain.exeptions.MyNotFound;
+import com.SpringBootAnnotations.infra.settings.HUser;
+
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<HUser, String> {

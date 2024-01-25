@@ -1,4 +1,4 @@
-package com.SpringBootAnnotations;
+package com.SpringBootAnnotations.infra.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+
+import com.SpringBootAnnotations.domain.User;
+import com.SpringBootAnnotations.domain.exeptions.MyNotFound;
+import com.SpringBootAnnotations.infra.settings.HUser;
 
 @Primary
 @Repository

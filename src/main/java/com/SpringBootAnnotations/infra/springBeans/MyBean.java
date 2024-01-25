@@ -1,4 +1,4 @@
-package com.SpringBootAnnotations;
+package com.SpringBootAnnotations.infra.springBeans;
 
 public class MyBean {
 

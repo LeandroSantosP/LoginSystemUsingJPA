@@ -1,4 +1,4 @@
-package com.SpringBootAnnotations;
+package com.SpringBootAnnotations.domain;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 import lombok.Getter;
@@ -23,6 +23,9 @@ public class User {
     this.email = email;
     this.password = password;
     this.roles = Roles.DEFAULT;
+  }
+
+  private void encrypPassword() {
   }
 
 }

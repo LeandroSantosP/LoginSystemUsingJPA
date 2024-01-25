@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
+
+import com.SpringBootAnnotations.infra.controllers.MyController.CreateUserInput;
+import com.SpringBootAnnotations.infra.controllers.MyController.ResponseUser;
+
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import com.SpringBootAnnotations.MyController.CreateUserInput;
-import com.SpringBootAnnotations.MyController.ResponseUser;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class MyControllerTest {
