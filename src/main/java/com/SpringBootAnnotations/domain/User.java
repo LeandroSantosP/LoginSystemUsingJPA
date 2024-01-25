@@ -1,5 +1,7 @@
 package com.SpringBootAnnotations.domain;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import edu.umd.cs.findbugs.annotations.NonNull;
 import lombok.Getter;
 
@@ -8,24 +10,33 @@ public class User {
   private String id;
 
   private @NonNull String name;
-
   private @NonNull int age;
-
   private @NonNull String email;
-
   private @NonNull Roles roles;
-
   private @NonNull String password;
 
   public User(String name, int age, String email, String password) {
     this.name = name;
     this.age = age;
     this.email = email;
-    this.password = password;
-    this.roles = Roles.DEFAULT;
+    this.password = this.encryptPassword(password);
+    this.roles = Roles.USER;
   }
 
-  private void encrypPassword() {
+  public User(String id, String name, int age, String email, String password, Roles roles) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.email = email;
+    this.password = this.encryptPassword(password);
+    this.roles = roles;
   }
 
+  public User rebuilder(String id, String name, int age, String email, String password, Roles roles) {
+    return new User(id, name, age, email, password, roles);
+  }
+
+  private String encryptPassword(String pass) {
+    return new BCryptPasswordEncoder().encode(pass);
+  }
 }

@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<HUser, String> {
     default public String pesiste(User user) {
         HUser userData = HUser.builder()
                 .name(user.getName()).age(user.getAge()).roles(user.getRoles())
-                .email(user.getEmail()).password(user.getPassword()).build();
+                .email(user.getEmail()).password(user.getPassword()).roles(user.getRoles()).build();
         this.save(userData);
         return user.getId();
     };
@@ -28,6 +28,6 @@ public interface UserRepository extends JpaRepository<HUser, String> {
         return new User(userData.getName(), userData.getAge(), userData.getEmail(), userData.getPassword());
     };
 
-    UserDetails findByName(String name);
+    UserDetails findByEmail(String login);
 
 }

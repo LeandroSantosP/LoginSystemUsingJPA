@@ -18,8 +18,10 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Builder
 @Entity(name = "users")
@@ -48,10 +50,10 @@ public class HUser implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     if (this.roles == Roles.ADMIN) {
-      return List.of(new SimpleGrantedAuthority(Roles.DEFAULT.getValue()),
+      return List.of(new SimpleGrantedAuthority(Roles.USER.getValue()),
           new SimpleGrantedAuthority(Roles.ADMIN.getValue()));
     }
-    return List.of(new SimpleGrantedAuthority(Roles.DEFAULT.getValue()));
+    return List.of(new SimpleGrantedAuthority(Roles.USER.getValue()));
   }
 
   @Override

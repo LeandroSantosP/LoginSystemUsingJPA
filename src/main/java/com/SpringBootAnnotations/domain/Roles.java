@@ -1,7 +1,8 @@
 package com.SpringBootAnnotations.domain;
 
 public enum Roles {
-  DEFAULT("commun"), ADMIN("admin");
+  ADMIN("admin"),
+  USER("user");
 
   private final String value;
 

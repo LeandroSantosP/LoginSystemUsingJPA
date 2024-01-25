@@ -224,8 +224,9 @@ public class UserRepositoryMemoryWithArray implements UserRepository {
     }
 
     @Override
-    public UserDetails findByName(String name) {
+    public UserDetails findByEmail(String login) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByName'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
     }
+
 }
