@@ -28,12 +28,8 @@ public class User {
     this.name = name;
     this.age = age;
     this.email = email;
-    this.password = this.encryptPassword(password);
+    this.password = password;
     this.roles = roles;
-  }
-
-  public User rebuilder(String id, String name, int age, String email, String password, Roles roles) {
-    return new User(id, name, age, email, password, roles);
   }
 
   private String encryptPassword(String pass) {

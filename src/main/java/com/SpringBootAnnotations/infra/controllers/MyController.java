@@ -3,6 +3,7 @@ package com.SpringBootAnnotations.infra.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.SpringBootAnnotations.application.GetUserOutput;
 import com.SpringBootAnnotations.application.LoginInput;
 import com.SpringBootAnnotations.application.UserService;
 import com.SpringBootAnnotations.infra.repositories.UserRepository;
+import com.SpringBootAnnotations.infra.repositories.UserRepository;
 import com.SpringBootAnnotations.infra.springBeans.LazyBean;
 import com.SpringBootAnnotations.infra.springBeans.Logger;
 import com.SpringBootAnnotations.infra.springBeans.MyBean;
@@ -22,7 +24,7 @@ import com.SpringBootAnnotations.infra.springBeans.MyBean;
 import jakarta.validation.Valid;
 
 @RestController
-// @Scope("singleton") /* <-- nice one */
+@Scope("singleton") /* <-- nice one */
 public class MyController {
 
     @Autowired
@@ -33,10 +35,6 @@ public class MyController {
 
     @Autowired
     private LazyBean lazyBean;
-
-    @Autowired
-    @Qualifier("userRepository")
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -52,6 +50,7 @@ public class MyController {
     public ResponseEntity<String> create(@RequestBody @Valid CreateUserInput body) {
         logger.currentTime();
         var output = this.userService.create(body);
+
         return ResponseEntity.ok(output);
     }
 
@@ -62,8 +61,8 @@ public class MyController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> postMethodName(@RequestBody @Valid LoginInput input) {
-        this.userService.login(input);
-        return ResponseEntity.ok().build();
+        var token = this.userService.login(input);
+        return ResponseEntity.ok(token);
     }
 
 }

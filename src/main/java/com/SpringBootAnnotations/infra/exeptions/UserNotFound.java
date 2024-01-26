@@ -1,8 +1,8 @@
-package com.SpringBootAnnotations.domain.exeptions;
+package com.SpringBootAnnotations.infra.exeptions;
 
 import org.springframework.http.HttpStatus;
 
-public class MyNotFound extends RuntimeException {
+public class UserNotFound extends RuntimeException {
 
     private String type = "default";
 
@@ -16,11 +16,11 @@ public class MyNotFound extends RuntimeException {
         return status;
     }
 
-    public MyNotFound() {
+    public UserNotFound() {
         super("User Not Found!");
     }
 
-    public MyNotFound(String message) {
+    public UserNotFound(String message) {
         super(message);
     }
 }

@@ -123,6 +123,12 @@
   <artifactId>java-jwt</artifactId>
   <version>4.4.0</version>
 </dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-test-autoconfigure</artifactId>
+    <version>1.4.0.RELEASE</version>
+    <scope>test</scope>
+</dependency>
 	</dependencies>
 	
 

@@ -1,5 +1,7 @@
 package com.SpringBootAnnotations.infra.settings;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.SpringBootAnnotations.infra.springBeans.LazyBean;
 import com.SpringBootAnnotations.infra.springBeans.Logger;
@@ -21,20 +24,24 @@ import com.SpringBootAnnotations.infra.springBeans.MyBean;
 public class BeansConfiguration {
 
     @Bean
-    public MyBean myBean() {
+    MyBean myBean() {
         return new MyBean();
     }
 
     @Bean
-    public Logger logger() {
+    Logger logger() {
         return new Logger();
     }
 
     @Bean
-    public LazyBean lazyBean() {
+    LazyBean lazyBean() {
         return new LazyBean();
     }
 
+    @Autowired
+    SecurityFilter securityFilter;
+
+    /* Spring security */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -43,8 +50,9 @@ public class BeansConfiguration {
                 .authorizeHttpRequests(auto -> auto
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/create").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/get/${id}")
-                        .hasRole("admin").anyRequest().authenticated())
+                        .requestMatchers("/get/${id}").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

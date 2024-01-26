@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.SpringBootAnnotations.domain.exeptions.InvalidUserData;
-import com.SpringBootAnnotations.domain.exeptions.MyNotFound;
+import com.SpringBootAnnotations.infra.exeptions.InvalidUserData;
+import com.SpringBootAnnotations.infra.exeptions.UserNotFound;
 
 @ControllerAdvice
 public class ExectionsHandler extends ResponseEntityExceptionHandler {
@@ -16,8 +16,8 @@ public class ExectionsHandler extends ResponseEntityExceptionHandler {
 
     }
 
-    @ExceptionHandler(MyNotFound.class)
-    private ResponseEntity<ErrorFormat> handlerMyNotFound(MyNotFound ex) {
+    @ExceptionHandler(UserNotFound.class)
+    private ResponseEntity<ErrorFormat> handlerMyNotFound(UserNotFound ex) {
         ErrorFormat errorFormat = new ErrorFormat(ex.getType(), ex.getStatus(), ex.getMessage());
         return ResponseEntity.status(ex.getStatus()).body(errorFormat);
     }

@@ -50,10 +50,10 @@ public class HUser implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     if (this.roles == Roles.ADMIN) {
-      return List.of(new SimpleGrantedAuthority(Roles.USER.getValue()),
-          new SimpleGrantedAuthority(Roles.ADMIN.getValue()));
+      return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+          new SimpleGrantedAuthority("ROLE_USER"));
     }
-    return List.of(new SimpleGrantedAuthority(Roles.USER.getValue()));
+    return List.of(new SimpleGrantedAuthority("ROLE_USER"));
   }
 
   @Override

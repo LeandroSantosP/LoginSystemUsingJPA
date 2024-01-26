@@ -1,24 +1,28 @@
 package com.SpringBootAnnotations.application;
 
-import java.io.StringReader;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import com.SpringBootAnnotations.domain.JwtManneger;
 import com.SpringBootAnnotations.domain.User;
-import com.SpringBootAnnotations.domain.exeptions.InvalidUserData;
+import com.SpringBootAnnotations.infra.exeptions.InvalidUserData;
 import com.SpringBootAnnotations.infra.repositories.UserRepository;
+import com.SpringBootAnnotations.infra.settings.HUser;
 
 @Service
 public class UserService {
   @Autowired
-  @Qualifier("userRepository")
   private UserRepository userRepository;
 
   @Autowired
   private AuthenticationManager authenticationManager;
+
+  @Value("${api.security.jwt_secret}")
+  public String jwtSecret;
 
   public String create(CreateUserInput input) {
     if (this.userRepository.findByEmail(input.email()) != null) {
@@ -28,9 +32,12 @@ public class UserService {
     return this.userRepository.pesiste(user);
   }
 
-  public void login(LoginInput input) {
-    var user = new UsernamePasswordAuthenticationToken(input.email(), input.password());
-    var auth = this.authenticationManager.authenticate(user);
+  public String login(LoginInput input) {
+    var credentials = new UsernamePasswordAuthenticationToken(input.email(), input.password());
+    Authentication auth = this.authenticationManager.authenticate(credentials);
+    HUser user = (HUser) auth.getPrincipal();
+    JwtManneger jwtManeget = new JwtManneger(jwtSecret);
+    return jwtManeget.generateToken(user.getEmail());
   }
 
   public GetUserOutput get(String id) {
