@@ -25,17 +25,8 @@ public class MyController {
     @Autowired
     private Logger logger;
 
-    // @Autowired
-    // private MyBean myBean;
-
-    // @Autowired
-    // private LazyBean lazyBean;
-
     @Autowired
     private UserService userService;
-
-    @Value("${app.portTest}")
-    private String postgresPort;
 
     public MyController() {
         System.out.println("CONTROLLER");

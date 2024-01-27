@@ -5,13 +5,11 @@ import java.util.Optional;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Repository;
 
 import com.AuthLogin.domain.User;
 import com.AuthLogin.infra.exeptions.UserNotFound;
 import com.AuthLogin.infra.settings.HUser;
 
-@Repository
 @Primary
 public interface UserRepository extends JpaRepository<HUser, String> {
 
