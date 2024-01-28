@@ -1,4 +1,4 @@
-package com.AuthLogin;
+package com.AuthLogin.entrypoint;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
